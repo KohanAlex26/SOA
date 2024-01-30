@@ -1,0 +1,52 @@
+services:
+  spring-back-end:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      VIRTUAL_PORT: 80
+      VIRTUAL_HOST: springbackend.local
+    depends_on:
+      - mysql-container
+      - rabbitmq-container
+      - loadbalancer
+
+  mysql-container:
+    image: mysql:8.3.0
+    container_name: 'mysql-container'
+    ports:
+      - 3306:3306
+    volumes:
+      - dbdata:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: employee_management_system
+      MYSQL_ROOT_PASSWORD: root
+
+  rabbitmq-container:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq'
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    networks:
+      - rabbitmq_network
+
+  loadbalancer:
+    image: jwilder/nginx-proxy
+    container_name: 'loadbalancer'
+    volumes:
+      - "/var/run/docker.sock:/tmp/docker.sock:ro"
+    ports:
+      - 8080:80
+    environment:
+      DEFAULT_HOST: springbackend.local
+
+volumes:
+  dbdata:
+
+networks:
+  rabbitmq_network:
+    driver: bridge
