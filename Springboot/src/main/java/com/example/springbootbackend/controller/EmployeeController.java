@@ -64,4 +64,9 @@ public class EmployeeController {
 
         return ResponseEntity.ok(employee);
     }
+
+    @GetMapping("hello")
+    public ResponseEntity<String> sayHello() {
+        return ResponseEntity.ok("Hello");
+    }
 }
