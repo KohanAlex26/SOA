@@ -6,8 +6,8 @@ import com.example.springbootbackend.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+
 //188.24.84.129
 //@CrossOrigin(origins = "http://192.168.100.27:3000")
 @CrossOrigin
