@@ -1,6 +1,6 @@
-package com.example.springbootbackend.config;
+package com.example.secondbackend.config;
 
-import com.example.springbootbackend.dao.UserDao;
+import com.example.secondbackend.dao.UserDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

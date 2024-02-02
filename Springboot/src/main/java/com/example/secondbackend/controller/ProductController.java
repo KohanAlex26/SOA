@@ -1,11 +1,12 @@
-package com.example.springbootbackend.controller;
+package com.example.secondbackend.controller;
 
-import com.example.springbootbackend.exception.ResourceNotFoundException;
-import com.example.springbootbackend.model.Product;
-import com.example.springbootbackend.repository.ProductRepository;
+import com.example.secondbackend.model.Product;
+import com.example.secondbackend.repository.ProductRepository;
+import com.example.secondbackend.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 //188.24.84.129

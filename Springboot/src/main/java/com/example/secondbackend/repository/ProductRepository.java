@@ -1,6 +1,6 @@
-package com.example.springbootbackend.repository;
+package com.example.secondbackend.repository;
 
-import com.example.springbootbackend.model.Product;
+import com.example.secondbackend.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
