@@ -6,6 +6,7 @@ services:
     environment:
       VIRTUAL_PORT: 80
       VIRTUAL_HOST: springbackend.local
+#      SPRING_CONFIG_LOCATION: classpath:/application1.properties
     depends_on:
       - mysql-container
       - rabbitmq-container
