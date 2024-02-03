@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.PropertySource;
 
 @SpringBootApplication
-@PropertySource("classpath:first.properties")
+//@PropertySource("classpath:first.properties")
 public class SpringbootBackendApplication {
 
     public static void main(String[] args) {
