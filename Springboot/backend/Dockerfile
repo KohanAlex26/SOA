@@ -1,11 +1,11 @@
 FROM openjdk:19-jdk-alpine as build
 WORKDIR /workspace/app
 
-COPY mvnw .
-COPY .mvn .mvn
+COPY ../mvnw .
+COPY ../.mvn .mvn
 RUN dos2unix mvnw
-COPY pom.xml .
-COPY src src
+COPY ../pom.xml .
+COPY ../src src
 
 RUN ./mvnw install -DskipTests
 RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)

@@ -2,7 +2,7 @@ services:
   spring-back-end-1:
 #    container_name: "spring-back-end-1"
     build:
-      context: .
+      context: ./backend
       dockerfile: Dockerfile
     environment:
       VIRTUAL_PORT: 80
@@ -46,6 +46,27 @@ services:
     depends_on:
       - spring-back-end-1
 
+  kafka:
+    image: wurstmeister/kafka
+    container_name: 'kafka'
+    ports:
+      - 9092:9092
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_HOST_NAME: kafka
+    depends_on:
+      - zookeeper
+
+  zookeeper:
+    image: wurstmeister/zookeeper
+    container_name: 'zookeeper'
+    ports:
+      - 2181:2181
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+    volumes:
+      - ~/.docker-conf/zookeeper/data/:/var/lib/zookeeper/data
+      - ~/.docker-conf/zookeeper/log/:/var/lib/zookeeper/log
 volumes:
   dbdata:
 
