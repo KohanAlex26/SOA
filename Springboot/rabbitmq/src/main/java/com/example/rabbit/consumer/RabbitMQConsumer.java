@@ -1,4 +1,4 @@
-package com.example.springbootbackend.consumer;
+package com.example.rabbit.consumer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

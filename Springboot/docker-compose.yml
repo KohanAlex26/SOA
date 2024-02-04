@@ -11,10 +11,10 @@ services:
       - mysql-container
       - rabbitmq-container
 
-  spring-back-end-2:
-    container_name: "spring-back-end-2"
+  spring-rabbit:
+    container_name: "spring-rabbit"
     build:
-      context: ./kafka-consumer
+      context: ./rabbitmq
       dockerfile: Dockerfile
     environment:
       VIRTUAL_PORT: 80
@@ -23,17 +23,29 @@ services:
       - mysql-container
       - rabbitmq-container
 
-  spring-back-end-3:
-    container_name: "spring-back-end-3"
-    build:
-      context: ./kafka-producer
-      dockerfile: Dockerfile
-    environment:
-      VIRTUAL_PORT: 80
-      VIRTUAL_HOST: springbackend.local
-    depends_on:
-      - mysql-container
-      - rabbitmq-container
+#  spring-back-end-2:
+#    container_name: "spring-back-end-2"
+#    build:
+#      context: ./kafka-consumer
+#      dockerfile: Dockerfile
+#    environment:
+#      VIRTUAL_PORT: 80
+#      VIRTUAL_HOST: springbackend.local
+#    depends_on:
+#      - mysql-container
+#      - rabbitmq-container
+#
+#  spring-back-end-3:
+#    container_name: "spring-back-end-3"
+#    build:
+#      context: ./kafka-producer
+#      dockerfile: Dockerfile
+#    environment:
+#      VIRTUAL_PORT: 80
+#      VIRTUAL_HOST: springbackend.local
+#    depends_on:
+#      - mysql-container
+#      - rabbitmq-container
 
   mysql-container:
     image: mysql:8.3.0

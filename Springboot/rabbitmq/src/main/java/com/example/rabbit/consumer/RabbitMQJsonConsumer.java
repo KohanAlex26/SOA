@@ -1,6 +1,6 @@
-package com.example.springbootbackend.consumer;
+package com.example.rabbit.consumer;
 
-import com.example.springbootbackend.dto.Contact;
+import com.example.rabbit.dto.Contact;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -13,6 +13,7 @@ public class RabbitMQJsonConsumer {
 
     @RabbitListener(queues = {"${rabbitmq.queue.json.name}"})
     public void consumeJsonMessage(Contact contact){
+        LOGGER.info("ASDsadadasdasdas");
         LOGGER.info(String.format("Received JSON message -> %s", contact.toString()));
     }
 }

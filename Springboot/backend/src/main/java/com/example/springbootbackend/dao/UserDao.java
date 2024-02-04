@@ -21,6 +21,14 @@ public class UserDao {
             new User("user2@gmail.com",
                     "password",
                     Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"))
+            ),
+            new User("user3@gmail.com",
+                    "password",
+                    Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"))
+            ),
+            new User("user4@gmail.com",
+                    "password",
+                    Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"))
             )
     );
 
