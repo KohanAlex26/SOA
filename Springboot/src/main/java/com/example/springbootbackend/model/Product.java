@@ -16,6 +16,8 @@ public class Product {
     @Column(name="price")
     private int price;
 
+    @Column(name="isAvailable")
+    private boolean isAvailable;
 
     public Product(){
 

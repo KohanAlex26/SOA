@@ -23,7 +23,7 @@ services:
       MYSQL_ROOT_PASSWORD: root
 
   rabbitmq-container:
-    image: rabbitmq:3-management-alpine
+    image: rabbitmq:3.10.5-management
     container_name: 'rabbitmq'
     ports:
       - 5672:5672
@@ -31,8 +31,8 @@ services:
     volumes:
       - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
       - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
-    networks:
-      - rabbitmq_network
+#    networks:
+#      - rabbitmq_network
 
   loadbalancer:
     image: nginx:latest
