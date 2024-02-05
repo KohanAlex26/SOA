@@ -23,7 +23,7 @@ public class RabbitMQProducer {
     }
 
     public void sendMessage(String message){
-        LOGGER.info(String.format("Message: %s", message));
+        LOGGER.info(String.format("Send message: %s", message));
         rabbitTemplate.convertAndSend(exchange, routingKey, message);
     }
 }
