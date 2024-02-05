@@ -1,6 +1,6 @@
 package com.example.springbootbackend.publisher;
 
-import com.example.springbootbackend.dto.Contact;
+import com.example.springbootbackend.model.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -24,8 +24,8 @@ public class RabbitMQJsonProducer {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    public void sendJsonMessage(Contact contact){
-        LOGGER.info(String.format("Json message sent -> %s", contact.toString()));
-        rabbitTemplate.convertAndSend(exchange, routingJsonKey, contact);
+    public void sendJsonMessage(Order order){
+        LOGGER.info(String.format("Json message sent -> %s", order.toString()));
+        rabbitTemplate.convertAndSend(exchange, routingJsonKey, order);
     }
 }

@@ -14,15 +14,11 @@ public class Producer {
 
     public void sendMessage(String message){
 
-        this.kafkaTemplate.send(TOPIC,message);
+        this.kafkaTemplate.send(TOPIC, message);
     }
 
     @Bean
     public NewTopic createTopic(){
-
-        return new NewTopic(TOPIC,3,(short) 1);
+        return new NewTopic(TOPIC,1,(short) 1);
     }
-
-
-
 }

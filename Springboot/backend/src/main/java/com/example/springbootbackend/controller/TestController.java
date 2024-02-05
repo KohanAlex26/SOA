@@ -2,6 +2,7 @@ package com.example.springbootbackend.controller;
 
 import com.example.springbootbackend.kafka.Producer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,12 +19,10 @@ public class TestController {
         this.producer = producer;
     }
 
-
     @PostMapping("/kafka")
-    public void messageToTopic(@RequestParam("message") String message){
-
+    public ResponseEntity<String> messageToTopic(@RequestParam("message") String message){
         this.producer.sendMessage(message);
-
+        return ResponseEntity.ok("Message sent to Kafka ...");
 
     }
 }

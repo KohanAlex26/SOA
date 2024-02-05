@@ -1,6 +1,6 @@
 package com.example.springbootbackend.controller;
 
-import com.example.springbootbackend.dto.Contact;
+import com.example.springbootbackend.model.Order;
 import com.example.springbootbackend.publisher.RabbitMQJsonProducer;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,8 +19,8 @@ public class MessageJsonController {
     }
 
     @PostMapping("/publish")
-    public ResponseEntity<String> sendJsonMessage(@RequestBody Contact contact){
-        jsonProducer.sendJsonMessage(contact);
+    public ResponseEntity<String> sendJsonMessage(@RequestBody Order order){
+        jsonProducer.sendJsonMessage(order);
         return ResponseEntity.ok("Json message sent to RabbitMQ ...");
     }
 }
