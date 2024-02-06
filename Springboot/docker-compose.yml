@@ -89,7 +89,7 @@ services:
   frontend-1:
     container_name: 'frontend-1'
     build:
-      context: ../web  # Change this to the path of your frontend application
+      context: ../web-all/web  # Change this to the path of your frontend application
       dockerfile: Dockerfile
     ports:
       - "3000:3000"  # Adjust the port if needed
@@ -99,7 +99,7 @@ services:
   frontend-2:
     container_name: 'frontend-2'
     build:
-      context: ../web2  # Change this to the path of your frontend application
+      context: ../web-all/web2  # Change this to the path of your frontend application
       dockerfile: Dockerfile
     ports:
       - "3001:3000"  # Adjust the port if needed
@@ -109,7 +109,7 @@ services:
   frontend-3:
     container_name: 'frontend-3'
     build:
-      context: ../web3  # Change this to the path of your frontend application
+      context: ../web-all/web3  # Change this to the path of your frontend application
       dockerfile: Dockerfile
     ports:
       - "3002:3000"  # Adjust the port if needed

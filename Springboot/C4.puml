@@ -1,0 +1,26 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+Person(user, "User", "People that need information about products/orders")
+Container(WebServer, "Web Server", "Nginx", "Exposes secured REST services and distributes traffic across multiple servers")
+Container(mainServer, "Main Server", "Spring Boot", "Handles specific business logic or functionality")
+Container(rabbitmq, "Message Broker Server", "RabbitMQ", "Facilitates communication between components")
+Container(kafka, "Event Streaming Server", "Kafka", "Facilitates event streaming between components")
+Container(faas, "Function as a Service", "", "Executes serverless functions")
+Container(frontEndApp, "Micro Frontend/Web App", "React", "Composed of multiple independent frontend modules")
+ContainerDb(dbContainer, "Database", "MySQL", "Stores and manages data")
+Container(docker, "Container Orchestration", "Docker", "Manages and orchestrates containers")
+
+Rel(user, docker, "Uses", "https")
+Rel(WebServer, mainServer, "Uses", "")
+Rel(frontEndApp, WebServer, "Consumes", "")
+Rel(mainServer, faas, "Triggers", "")
+Rel(WebServer, frontEndApp, "Manages", "")
+Rel(docker, WebServer, "Manages", "")
+Rel(docker, kafka, "Manages", "")
+Rel(docker, frontEndApp, "Manages", "")
+Rel(docker, rabbitmq, "Manages", "")
+Rel(mainServer, dbContainer, "Uses", "")
+Rel(rabbitmq, dbContainer, "Uses", "")
+Rel(kafka, dbContainer, "Uses", "")
+@enduml
