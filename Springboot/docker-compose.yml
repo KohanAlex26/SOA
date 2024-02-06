@@ -86,6 +86,36 @@ services:
       KAFKA_CREATE_TOPICS: "test_topic:1:1"
       KAFKA_MESSAGE_MAX_BYTES: 2097152
 
+  frontend-1:
+    container_name: 'frontend-1'
+    build:
+      context: ../web  # Change this to the path of your frontend application
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"  # Adjust the port if needed
+    depends_on:
+      - loadbalancer  # Ensure the load balancer is running before starting the frontend
+
+  frontend-2:
+    container_name: 'frontend-2'
+    build:
+      context: ../web2  # Change this to the path of your frontend application
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3000"  # Adjust the port if needed
+    depends_on:
+      - loadbalancer  # Ensure the load balancer is running before starting the frontend
+
+  frontend-3:
+    container_name: 'frontend-3'
+    build:
+      context: ../web3  # Change this to the path of your frontend application
+      dockerfile: Dockerfile
+    ports:
+      - "3002:3000"  # Adjust the port if needed
+    depends_on:
+      - loadbalancer  # Ensure the load balancer is running before starting the frontend
+
 volumes:
   dbdata:
 
