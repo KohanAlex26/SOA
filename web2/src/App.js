@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const MicrofrontendApp = () => {
   const [products, setProducts] = useState([]);
-  const jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyNkBnbWFpbC5jb20iLCJleHAiOjE3MDcyMTU0NjMsImlhdCI6MTcwNzE3OTQ2M30.RJ8ZfDXwZ5gbKL1c6JUupedpx7xuInbT3cJlgtY1LR8";
+  const jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyNkBnbWFpbC5jb20iLCJleHAiOjE3MDcyNTE1NDIsImlhdCI6MTcwNzIxNTU0Mn0.TFoIkTygTCt_tbmQcEn4w-UG7JVJuddLn77Vh4y7BH4";
 
   useEffect(() => {
     const fetchData = async () => {

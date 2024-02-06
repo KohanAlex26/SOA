@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const OrderMicrofrontend = () => {
   const [orders, setOrders] = useState([]);
+  const [modifiedOrders, setModifiedOrders] = useState([]);
   const jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyNkBnbWFpbC5jb20iLCJleHAiOjE3MDcyNTE1NDIsImlhdCI6MTcwNzIxNTU0Mn0.TFoIkTygTCt_tbmQcEn4w-UG7JVJuddLn77Vh4y7BH4";
 
   useEffect(() => {
@@ -16,6 +17,7 @@ const OrderMicrofrontend = () => {
         if (response.ok) {
           const ordersData = await response.json();
           setOrders(ordersData);
+          setModifiedOrders(ordersData); // Initialize modifiedOrders with initial data
         } else {
           console.error("Failed to fetch orders:", response.statusText);
         }
@@ -26,6 +28,12 @@ const OrderMicrofrontend = () => {
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    // This useEffect will run whenever modifiedOrders is updated
+    // You can add additional logic or API calls here if needed
+    console.log("Modified orders updated:", modifiedOrders);
+  }, [modifiedOrders]);
 
   const handleButtonClick = async (orderId) => {
     const clickedOrder = orders.find((order) => order.id === orderId);
@@ -42,6 +50,9 @@ const OrderMicrofrontend = () => {
 
         if (response.ok) {
           console.log(`Post request successful for order with ID: ${orderId}`);
+          
+          // Update modifiedOrders after each process
+          setModifiedOrders((prevOrders) => prevOrders.map(order => order.id === orderId ? { ...order, completed: true } : order));
         } else {
           console.error("Failed to send post request:", response.statusText);
         }
@@ -66,7 +77,7 @@ const OrderMicrofrontend = () => {
           </tr>
         </thead>
         <tbody>
-          {orders.map((order) => (
+          {modifiedOrders.map((order) => (
             <tr key={order.id}>
               <td>{order.id}</td>
               <td>{order.productName}</td>
