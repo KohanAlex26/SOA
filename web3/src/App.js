@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const OrderMicrofrontend = () => {
   const [orders, setOrders] = useState([]);
-  const jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyNkBnbWFpbC5jb20iLCJleHAiOjE3MDcyMTU0NjMsImlhdCI6MTcwNzE3OTQ2M30.RJ8ZfDXwZ5gbKL1c6JUupedpx7xuInbT3cJlgtY1LR8";
+  const jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyNkBnbWFpbC5jb20iLCJleHAiOjE3MDcyNTE1NDIsImlhdCI6MTcwNzIxNTU0Mn0.TFoIkTygTCt_tbmQcEn4w-UG7JVJuddLn77Vh4y7BH4";
 
   useEffect(() => {
     const fetchData = async () => {
@@ -61,6 +61,7 @@ const OrderMicrofrontend = () => {
           <tr>
             <th>ID</th>
             <th>Product Name</th>
+            <th>Completed</th>
             {/* <th>Action</th> */}
           </tr>
         </thead>
@@ -69,6 +70,7 @@ const OrderMicrofrontend = () => {
             <tr key={order.id}>
               <td>{order.id}</td>
               <td>{order.productName}</td>
+              <td>{order.completed ? 'Yes' : 'No'}</td>
               <td>
                 <button onClick={() => handleButtonClick(order.id)}>
                   Process
