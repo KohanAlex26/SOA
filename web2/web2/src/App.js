@@ -1,44 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
 const MicrofrontendApp = () => {
-  const [errorMessages, setErrorMessages] = useState({});
   const [products, setProducts] = useState([]);
-  // const [jwtToken, setJwtToken] = useState(null);
-
   const jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyNkBnbWFpbC5jb20iLCJleHAiOjE3MDcyMTU0NjMsImlhdCI6MTcwNzE3OTQ2M30.RJ8ZfDXwZ5gbKL1c6JUupedpx7xuInbT3cJlgtY1LR8";
-  const errors = {
-    uname: "invalid username",
-    pass: "invalid password"
-  };
-
-  // useEffect(() => {
-  //   const authenticateUser = async () => {
-  //     const email = "user12@gmail.com";
-  //     const password = "password";
-  
-  //     try {
-  //       const response = await fetch("http://localhost:80/api/v1/auth/authenticate", {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json"
-  //         },
-  //         body: JSON.stringify({ email, password })
-  //       });
-  
-  //       if (response.ok) {
-  //         const token = await response.text();
-  //         setJwtToken(token);
-  //       } else {
-  //         setErrorMessages({ name: "uname", message: errors.uname });
-  //       }
-  //     } catch (error) {
-  //       console.error("Error occurred during authentication:", error);
-  //       setErrorMessages({ name: "uname", message: errors.uname });
-  //     }
-  //   };
-    
-  //   authenticateUser();
-  // }, []);
 
   useEffect(() => {
     const fetchData = async () => {
