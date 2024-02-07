@@ -13,7 +13,7 @@ services:
   spring-rabbit:
     container_name: "spring-rabbit"
     build:
-      context: ./rabbitmq
+      context: ./message-broker-backend
       dockerfile: Dockerfile
     environment:
       VIRTUAL_PORT: 80
@@ -22,10 +22,10 @@ services:
       - mysql-container
       - rabbitmq-container
 
-  spring-kafka-consumer:
-    container_name: "spring-kafka-consumer"
+  spring-kafka:
+    container_name: "spring-kafka"
     build:
-      context: ./kafka
+      context: ./event-streaming-backend
       dockerfile: Dockerfile
     environment:
       VIRTUAL_PORT: 80

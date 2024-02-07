@@ -4,19 +4,15 @@ class com.example.springbootbackend.exception.ResourceNotFoundException {
 }
 class com.example.springbootbackend.controller.ProductController {
 - ProductRepository productRepository
+- MyFunctionService myFunctionService
++ ResponseEntity<Long> myFunction(long)
 + List<Product> getAllProducts()
 + Product createProduct(Product)
 + ResponseEntity<Product> getProductById(long)
 + ResponseEntity<Product> updateProduct(long,Product)
 + ResponseEntity<Product> deleteProduct(long)
-+ ResponseEntity<String> sayHello()
 }
-class com.example.springbootbackend.controller.MyFunctionClass {
-+ ResponseEntity<Long> function(long)
-}
-interface com.example.kafka.repository.OrderRepository {
-}
-class com.example.rabbit.model.Order {
+class com.example.kafka.model.Order {
 - long id
 - String productName
 - boolean completed
@@ -29,16 +25,7 @@ class com.example.rabbit.model.Order {
 }
 interface com.example.springbootbackend.repository.OrderRepository {
 }
-class com.example.kafka.model.Order {
-- long id
-- String productName
-- boolean completed
-+ long getId()
-+ void setId(long)
-+ String getProductName()
-+ void setProductName(String)
-+ boolean completed()
-+ void setCompleted(boolean)
+interface com.example.kafka.repository.OrderRepository {
 }
 class com.example.rabbit.config.RabbitMQConfig {
 - String queue
@@ -54,25 +41,14 @@ class com.example.rabbit.config.RabbitMQConfig {
 + MessageConverter converter()
 + AmqpTemplate amqpTemplate(ConnectionFactory)
 }
-class com.example.rabbit.SpringbootRabbitApplication {
-+ {static} void main(String[])
-}
-class com.example.rabbit.consumer.RabbitMQJsonConsumer {
-- {static} Logger LOGGER
-- OrderRepository orderRepository
-+ void consumeJsonMessage(Order)
+class com.example.kafka.exception.ResourceNotFoundException {
+- {static} long serialVersionUID
 }
 class com.example.springbootbackend.kafka.Producer {
 - {static} String TOPIC
 - KafkaTemplate<String,String> kafkaTemplate
 + void sendMessage(String)
 + NewTopic createTopic()
-}
-class com.example.springbootbackend.SpringbootKafkaRealWorldProjectApplicationTests {
-~ void contextLoads()
-}
-class com.example.kafka.exception.ResourceNotFoundException {
-- {static} long serialVersionUID
 }
 class com.example.springbootbackend.model.Product {
 - long id
@@ -85,9 +61,6 @@ class com.example.springbootbackend.model.Product {
 + int getPrice()
 + void setPrice(int)
 }
-class com.example.kafka.SpringbootKafkaApplication {
-+ {static} void main(String[])
-}
 class com.example.springbootbackend.config.JwtUtils {
 - String SECRET_KEY
 + String extractUsername(String)
@@ -98,6 +71,9 @@ class com.example.springbootbackend.config.JwtUtils {
 + String generateToken(UserDetails)
 - String createToken(Map<String,Object>,String)
 + Boolean validateToken(String,UserDetails)
+}
+class com.example.springbootbackend.service.MyFunctionService {
++ ResponseEntity<Long> function(long)
 }
 class com.example.springbootbackend.controller.MessageJsonController {
 - RabbitMQJsonProducer jsonProducer
@@ -125,9 +101,12 @@ class com.example.springbootbackend.controller.TestController {
 - Producer producer
 + ResponseEntity<String> messageToTopic(String)
 }
-interface com.example.rabbit.repository.OrderRepository {
-}
 interface com.example.springbootbackend.repository.UserRepository {
+}
+class com.example.rabbit.consumer.RabbitMQJsonConsumer {
+- {static} Logger LOGGER
+- OrderRepository orderRepository
++ void consumeJsonMessage(Order)
 }
 class com.example.springbootbackend.config.JwtAthFilter {
 - UserDao userDao
@@ -157,18 +136,23 @@ class com.example.springbootbackend.config.SecurityConfig {
 + PasswordEncoder passwordEncoder()
 + UserDetailsService userDetailsService()
 }
+interface com.example.rabbit.repository.OrderRepository {
+}
 class com.example.springbootbackend.dao.UserDao {
 - {static} List<UserDetails> APPLICATION_USERS
+- {static} List<UserDetails> generateUsers()
 + UserDetails findUserByEmail(String)
+}
+class com.example.rabbit.SpringbootRabbitApplication {
++ {static} void main(String[])
 }
 class com.example.springbootbackend.controller.OrderController {
 - OrderRepository orderRepository
 + List<Order> getAllOrders()
 + ResponseEntity<Order> deleteOrder(long)
 }
-class com.example.rabbit.consumer.RabbitMQConsumer {
-- {static} Logger LOGGER
-+ void consume(String)
+class com.example.kafka.SpringbootKafkaApplication {
++ {static} void main(String[])
 }
 class com.example.springbootbackend.controller.UserController {
 - UserRepository userRepository
@@ -181,8 +165,13 @@ class com.example.springbootbackend.dto.AuthenticationRequest {
 - String email
 - String password
 }
-class com.example.springbootbackend.SpringbootKafkaRealWorldProjectApplication {
-+ {static} void main(String[])
+class com.example.kafka.consumer.Consumer {
+- OrderRepository orderRepository
++ ResponseEntity<Order> consumeMessage(String)
+}
+class com.example.rabbit.consumer.RabbitMQConsumer {
+- {static} Logger LOGGER
++ void consume(String)
 }
 class com.example.springbootbackend.controller.AuthenticationController {
 - AuthenticationManager authenticationManager
@@ -211,10 +200,6 @@ class com.example.springbootbackend.publisher.RabbitMQJsonProducer {
 class com.example.springbootbackend.SpringbootBackendApplication {
 + {static} void main(String[])
 }
-class com.example.kafka.consumer.Consumer {
-- OrderRepository orderRepository
-+ ResponseEntity<Order> consumeMessage(String)
-}
 class com.example.springbootbackend.publisher.RabbitMQProducer {
 - String exchange
 - String routingKey
@@ -222,16 +207,27 @@ class com.example.springbootbackend.publisher.RabbitMQProducer {
 - {static} Logger LOGGER
 + void sendMessage(String)
 }
+class com.example.rabbit.model.Order {
+- long id
+- String productName
+- boolean completed
++ long getId()
++ void setId(long)
++ String getProductName()
++ void setProductName(String)
++ boolean completed()
++ void setCompleted(boolean)
+}
 interface com.example.springbootbackend.repository.ProductRepository {
 }
 
 
 com.example.springbootbackend.exception.RuntimeException <|-- com.example.springbootbackend.exception.ResourceNotFoundException
-org.springframework.data.jpa.repository.JpaRepository <|-- com.example.kafka.repository.OrderRepository
 org.springframework.data.jpa.repository.JpaRepository <|-- com.example.springbootbackend.repository.OrderRepository
+org.springframework.data.jpa.repository.JpaRepository <|-- com.example.kafka.repository.OrderRepository
 com.example.kafka.exception.RuntimeException <|-- com.example.kafka.exception.ResourceNotFoundException
-org.springframework.data.jpa.repository.JpaRepository <|-- com.example.rabbit.repository.OrderRepository
 org.springframework.data.jpa.repository.JpaRepository <|-- com.example.springbootbackend.repository.UserRepository
 org.springframework.web.filter.OncePerRequestFilter <|-- com.example.springbootbackend.config.JwtAthFilter
+org.springframework.data.jpa.repository.JpaRepository <|-- com.example.rabbit.repository.OrderRepository
 org.springframework.data.jpa.repository.JpaRepository <|-- com.example.springbootbackend.repository.ProductRepository
 @enduml
