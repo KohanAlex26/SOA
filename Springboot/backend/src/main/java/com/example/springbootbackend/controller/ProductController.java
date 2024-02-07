@@ -3,14 +3,13 @@ package com.example.springbootbackend.controller;
 import com.example.springbootbackend.exception.ResourceNotFoundException;
 import com.example.springbootbackend.model.Product;
 import com.example.springbootbackend.repository.ProductRepository;
+import com.example.springbootbackend.service.MyFunctionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-//188.24.84.129
-//@CrossOrigin(origins = "http://192.168.100.27:3000")
 @CrossOrigin
 @RestController
 @RequestMapping("/api/v1/")
@@ -18,6 +17,14 @@ public class ProductController {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private MyFunctionService myFunctionService;
+
+    @GetMapping("/function/{price}")
+    public ResponseEntity<Long> myFunction(@PathVariable long price){
+        return myFunctionService.function(price);
+    }
 
     //get all products
     @GetMapping("/products")
@@ -63,10 +70,5 @@ public class ProductController {
         productRepository.delete(product);
 
         return ResponseEntity.ok(product);
-    }
-
-    @GetMapping("hello2")
-    public ResponseEntity<String> sayHello() {
-        return ResponseEntity.ok("Hello2");
     }
 }

@@ -76,21 +76,19 @@ const Dashboard = ({ jwtToken }) => {
           "Content-Type": "text/plain"
         }
       });
-
+  
       if (!functionResponse.ok) {
         console.error("Failed to fetch details:", functionResponse.statusText);
         return;
       }
-
+  
       // Create the updated product object
       const updatedProduct = {
         id: productId,
         name: productName, // Replace with the actual property name returned by the function
         price: await functionResponse.json(), // Replace with the actual property price returned by the function
       };
-
-      console.log(updatedProduct);
-
+  
       // Make the PUT request to update the product
       const updateResponse = await fetch(`http://localhost:80/api/v1/products/${productId}`, {
         method: "PUT",
@@ -100,10 +98,10 @@ const Dashboard = ({ jwtToken }) => {
         },
         body: JSON.stringify(updatedProduct)
       });
-
+  
       if (updateResponse.ok) {
         console.log(`Product with ID ${productId} updated successfully`);
-
+  
         // Refresh the list of products after the update
         fetchData();
       } else {
@@ -113,6 +111,11 @@ const Dashboard = ({ jwtToken }) => {
       console.error("Error updating product:", error);
     }
   };
+  
+  const handleRefresh = () => {
+    // Call the fetchData function to fetch the latest products and orders
+    fetchData();
+  };
 
   return (
     <div className="dashboard">
@@ -120,16 +123,14 @@ const Dashboard = ({ jwtToken }) => {
         <div className="column">
           <h3>Products</h3>
           <table>
-
             <thead>
               <tr>
                 <th>Product ID</th>
                 <th>Product Name</th>
                 <th>Price</th>
-                <th>Action</th> {/* New column for the button */}
+                <th>Action</th>
               </tr>
             </thead>
-
             <tbody>
               {products.map((product) => (
                 <tr key={product.id}>
@@ -144,13 +145,11 @@ const Dashboard = ({ jwtToken }) => {
                 </tr>
               ))}
             </tbody>
-
           </table>
         </div>
         <div className="column">
           <h3>Orders</h3>
           <table>
-
             <thead>
               <tr>
                 <th>Order ID</th>
@@ -158,7 +157,6 @@ const Dashboard = ({ jwtToken }) => {
                 <th>Completed</th>
               </tr>
             </thead>
-
             <tbody>
               {orders.map((order) => (
                 <tr key={order.id}>
@@ -168,7 +166,6 @@ const Dashboard = ({ jwtToken }) => {
                 </tr>
               ))}
             </tbody>
-
           </table>
         </div>
         <div className="column">
@@ -193,6 +190,9 @@ const Dashboard = ({ jwtToken }) => {
             <button type="submit">Add Product</button>
           </form>
         </div>
+      </div>
+      <div className="refresh-button">
+        <button onClick={handleRefresh}>Refresh</button>
       </div>
     </div>
   );

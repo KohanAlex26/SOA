@@ -2,66 +2,32 @@ import React, { useState, useEffect } from 'react';
 
 const MicrofrontendApp = () => {
   const [products, setProducts] = useState([]);
-  const [jwtToken, setJwtToken] = useState(localStorage.getItem('jwtToken2'));
+  const jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMTAwQGdtYWlsLmNvbSIsImV4cCI6MTcwOTAzNzg4OCwiaWF0IjoxNzA3MzA5ODg4fQ.cWKqf030juHRCYFAbyOZvO2BnUNk-di3H2LORm92Rng";
 
   useEffect(() => {
-    const authenticateUser = async () => {
-      try {
-        // If the token is not present in local storage, perform authentication
-        if (!jwtToken) {
-          const authResponse = await fetch("http://localhost:80/api/v1/auth/authenticate", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              email: "user10@gmail.com",
-              password: "password",
-            }),
-          });
+    fetchData();
+  }, [jwtToken]);
 
-          if (authResponse.ok) {
-            const { token } = await authResponse.json();
-            setJwtToken(token);
-            
-            // Store the token in local storage for future use
-            localStorage.setItem('jwtToken2', token);
-          } else {
-            console.error("Authentication failed:", authResponse.statusText);
-          }
+  const fetchData = async () => {
+    if (jwtToken) {
+      try {
+        const response = await fetch("http://localhost:80/api/v1/products", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${jwtToken}`,
+          },
+        });
+        if (response.ok) {
+          const productsData = await response.json();
+          setProducts(productsData);
+        } else {
+          console.error("Failed to fetch products:", response.statusText);
         }
       } catch (error) {
-        console.error("Error authenticating user:", error);
+        console.error("Error fetching products:", error);
       }
-    };
-
-    authenticateUser();
-  }, []);
-
-  useEffect(() => {
-    if (jwtToken) {
-      const fetchData = async () => {
-        try {
-          const response = await fetch("http://localhost:80/api/v1/products", {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${jwtToken}`,
-            },
-          });
-          if (response.ok) {
-            const productsData = await response.json();
-            setProducts(productsData);
-          } else {
-            console.error("Failed to fetch products:", response.statusText);
-          }
-        } catch (error) {
-          console.error("Error fetching products:", error);
-        }
-      };
-
-      fetchData();
     }
-  }, [jwtToken]);
+  };
 
   const handleButtonClick = async (productId) => {
     const clickedProduct = products.find((product) => product.id === productId);
@@ -93,16 +59,23 @@ const MicrofrontendApp = () => {
     }
   };
 
+  const handleRefreshClick = () => {
+    fetchData();
+  };
+
   return (
     <div className="microfrontend-app">
-      <h2>List of Products</h2>
+      <div>
+        <h2>List of Products</h2>
+        <button onClick={handleRefreshClick}>Refresh</button>
+      </div>
       <table>
         <thead>
           <tr>
             <th>ID</th>
             <th>Name</th>
             <th>Price</th>
-
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>

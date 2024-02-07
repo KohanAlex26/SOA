@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-//188.24.84.129
-//@CrossOrigin(origins = "http://192.168.100.27:3000")
 @CrossOrigin
 @RestController
 @RequestMapping("/api/v1/")
