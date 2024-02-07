@@ -49,6 +49,50 @@ public class UserDao {
             new User("user9@gmail.com",
                     "password",
                     Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"))
+            ),
+            new User("user10@gmail.com",
+                    "password",
+                    Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"))
+            ),
+            new User("user11@gmail.com",
+                    "password",
+                    Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"))
+            ),
+            new User("user12@gmail.com",
+                    "password",
+                    Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"))
+            ),
+            new User("user13@gmail.com",
+                    "password",
+                    Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"))
+            ),
+            new User("user14@gmail.com",
+                    "password",
+                    Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"))
+            ),
+            new User("user15@gmail.com",
+                    "password",
+                    Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"))
+            ),
+            new User("user16@gmail.com",
+                    "password",
+                    Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"))
+            ),
+            new User("user17@gmail.com",
+                    "password",
+                    Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"))
+            ),
+            new User("user18@gmail.com",
+                    "password",
+                    Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"))
+            ),
+            new User("user19@gmail.com",
+                    "password",
+                    Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"))
+            ),
+            new User("user20@gmail.com",
+                    "password",
+                    Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"))
             )
     );
 
