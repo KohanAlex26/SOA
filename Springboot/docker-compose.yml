@@ -116,6 +116,15 @@ services:
     depends_on:
       - loadbalancer
 
+  frontend-4:
+    container_name: 'frontend-4'
+    build:
+      context: ../web-all
+      dockerfile: Dockerfile
+    ports:
+      - "3003:3000"
+    depends_on:
+      - loadbalancer
 volumes:
   dbdata:
 
