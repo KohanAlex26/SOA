@@ -89,32 +89,32 @@ services:
   frontend-1:
     container_name: 'frontend-1'
     build:
-      context: ../web-all/web  # Change this to the path of your frontend application
+      context: ../web-all/web
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"  # Adjust the port if needed
+      - "3000:3000"
     depends_on:
-      - loadbalancer  # Ensure the load balancer is running before starting the frontend
+      - loadbalancer
 
   frontend-2:
     container_name: 'frontend-2'
     build:
-      context: ../web-all/web2  # Change this to the path of your frontend application
+      context: ../web-all/web2
       dockerfile: Dockerfile
     ports:
-      - "3001:3000"  # Adjust the port if needed
+      - "3001:3000"
     depends_on:
-      - loadbalancer  # Ensure the load balancer is running before starting the frontend
+      - loadbalancer
 
   frontend-3:
     container_name: 'frontend-3'
     build:
-      context: ../web-all/web3  # Change this to the path of your frontend application
+      context: ../web-all/web3
       dockerfile: Dockerfile
     ports:
-      - "3002:3000"  # Adjust the port if needed
+      - "3002:3000"
     depends_on:
-      - loadbalancer  # Ensure the load balancer is running before starting the frontend
+      - loadbalancer
 
 volumes:
   dbdata:
